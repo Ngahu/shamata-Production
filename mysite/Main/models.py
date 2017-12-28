@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 from django.conf import settings
 from django.db import models
-
+from .utils import unique_slug_generator
+from django.db.models.signals import pre_save,post_save
 # Create your models here.
 
 User = settings.AUTH_USER_MODEL 
@@ -15,9 +16,9 @@ def upload_location(instance,filename):
 
 
 class Post(models.Model):
-    owner =  models.ForeignKeyField(User, on_delete=models.CASCADE)
+    owner =  models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True)
+    slug      =      models.SlugField(unique=True,blank=True, null=True)
     location = models.CharField(max_length=150)
     image = models.ImageField(upload_to=upload_location)
     image_2 = models.ImageField(upload_to=upload_location)
@@ -25,10 +26,10 @@ class Post(models.Model):
     image_4 = models.ImageField(upload_to=upload_location,blank=True, null=True)
     image_5 = models.ImageField(upload_to=upload_location,blank=True, null=True)
     description = models.TextField()
-    size_of_land = models.models.CharField(max_length=150)
+    size_of_land = models.CharField(max_length=150)
     location_details = models.CharField(max_length=300)
-    price = models.models.CharField(max_length=150)
-    features = models.models.CharField(max_length=150)
+    price = models.CharField(max_length=150)
+    features = models.TextField()
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 
@@ -50,3 +51,11 @@ class Post(models.Model):
 
 
 
+
+def Post_pre_save_receiver(sender,instance,*args,**kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+
+
+pre_save.connect(Post_pre_save_receiver,sender=Post)

@@ -8,7 +8,7 @@ from .models import Post
 
 
 class PostListView(ListView):
-    pass
+    queryset = Post.objects.all()
 
 
 

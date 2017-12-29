@@ -4,10 +4,10 @@ from .models import Post
 
 class PostForm(forms.ModelForm):
     image = forms.ImageField(label='A must')
-    image_2 = forms.ImageField(label='A must')
-    image_3 = forms.ImageField(label='A must')
-    image_4 = forms.ImageField(label='A must')
-    image_5 = forms.ImageField(label='A must')
+    # image_2 = forms.ImageField(label='A must')
+    # image_3 = forms.ImageField(label='A must')
+    # image_4 = forms.ImageField(label='A must')
+    # image_5 = forms.ImageField(label='A must')
     class Meta:
         model = Post
         fields = [

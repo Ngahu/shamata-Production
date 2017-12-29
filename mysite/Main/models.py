@@ -60,3 +60,24 @@ def Post_pre_save_receiver(sender,instance,*args,**kwargs):
 
 
 pre_save.connect(Post_pre_save_receiver,sender=Post)
+
+
+
+
+#for the Gallery
+
+class Gallery(models.Model):
+    image_title        =  models.CharField(max_length=100)
+    image_description  =  models.TextField()
+    gallery_image      =  models.ImageField(upload_to=upload_location,blank=True, null=True)
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True,blank=True, null=True)
+
+    def __str__(self):
+        return self.image_title
+
+    def __unicode__(self):
+        return self.image_title
+
+    class Meta:
+        ordering = ["-timestamp"]
+        verbose_name_plural = "Gallery"

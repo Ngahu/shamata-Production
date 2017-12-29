@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView,CreateView,UpdateView,Dele
 from django.shortcuts import render
 from .models import Post,Gallery
 from .forms import PostForm
-from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.http import Http404
 # Create your views here.
 
@@ -92,21 +92,3 @@ class GalleryDeleteView(DetailView):
 
 
 
-
-
-##The Dashboard Views From Here
-
-def Dashboard(request):# incharge of the secong dmin panell for editing the website
-    if not request.user.is_staff or not request.user.is_superuser:
-        raise Http404
-    context = {
-         "title":"Welcome to the  Dashboard",
-         "title_small":" Admin Overview"
-    }
-    return render(request,"Dashboard/dashboard.html",context)
-
-
-class DashboardPostListView(LoginRequiredMixin,ListView):
-    template_name = 'Dashboard/listings.html'
-    def get_queryset(self):
-        return Post.objects.filter(owner=self.request.user)

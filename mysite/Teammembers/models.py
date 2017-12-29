@@ -21,6 +21,8 @@ class Team_Meamber(models.Model):
     members_phone_number = PhoneNumberField(blank=True, null=True)
     members_email = models.EmailField()
     members_image = models.ImageField(upload_to=upload_location) #null=False,blank=False
+    # timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+    # updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     
 
     def __str__(self):
@@ -34,8 +36,8 @@ class Team_Meamber(models.Model):
     # def get_absolute_url(self):
     #     return reverse("Teammembers:detail",kwargs={"slug":self.slug})
 
-    def get_absolute_url_2(self):
-        return reverse("Main:single_member_detail",kwargs={"id": self.id})
+    def get_absolute_url(self):
+        return reverse("Teammembers:detail",kwargs={"id": self.id})
 
 
 

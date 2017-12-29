@@ -9,7 +9,7 @@
 <body>
     <h1>wowo</h1>
     {% for post in post_list %}
-    <li><a href="{{ obj.get_absolute_url }}">{{ obj }}</a></li>
+    <li><a href="{{ post.get_absolute_url }}">{{ post }}</a></li>
    Name:{{ post.title }} <br>   location:{{ post.location }} <br> category:{{ post.description }}  <br> Created:{{ post.timestamp }}
     {% endfor %}
 </body>

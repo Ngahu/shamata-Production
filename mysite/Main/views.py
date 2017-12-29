@@ -15,9 +15,9 @@ class PostListView(ListView):
 
 
 
-
 class PostDetailView(DetailView):
-    pass
+    def get_queryset(self):
+        return Post.objects.all()
 
 
 class PostCreateView(CreateView):

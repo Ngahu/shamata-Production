@@ -7,15 +7,11 @@ from .models import Team_Meamber
 
 
 class Team_MeamberListView(ListView):
-    pass
+    queryset = Team_Meamber.objects.all()
 
 
 
 class Team_MeamberCreateView(CreateView):
-    pass
-
-
-class Team_MeamberListView(ListView):
     pass
 
 

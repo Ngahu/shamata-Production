@@ -73,3 +73,34 @@ class PostDeleteView(DeleteView):
 
 
 ###The Gallery Views from here 
+
+class GalleryCreateView(CreateView):
+    pass
+
+
+class GalleryListView(ListView):
+    queryset = Gallery.objects.all()
+
+
+class GalleryUpdateView(UpdateView):
+    pass
+
+
+class GalleryDeleteView(DetailView):
+    pass
+
+
+
+
+
+
+##The Dashboard Views From Here
+
+def Dashboard(request):# incharge of the secong dmin panell for editing the website
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+    context = {
+         "title":"Welcome to the  Dashboard",
+         "title_small":" Admin Overview"
+    }
+    return render(request,"Dashboard/dashboard.html",context)

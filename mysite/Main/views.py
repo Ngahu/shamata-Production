@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
 from django.shortcuts import render
-from .models import Post
+from .models import Post,Gallery
 from .forms import PostForm
 
 from django.http import Http404

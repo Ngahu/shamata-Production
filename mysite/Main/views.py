@@ -67,3 +67,9 @@ class PostDeleteView(DeleteView):
     pass
 
 
+
+
+
+
+
+###The Gallery Views from here 

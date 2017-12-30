@@ -17,10 +17,18 @@ def Dashboard(request):# incharge of the secong dmin panell for editing the webs
          "title":"Welcome to the  Dashboard",
          "title_small":" Admin Overview"
     }
-    return render(request,"Dashboard/dashboard.html",context)
+    return render(request,"dashboard/dashboard.html",context)
 
 
 class DashboardPostListView(LoginRequiredMixin,ListView):
     template_name = 'Dashboard/listings.html'
     def get_queryset(self):
         return Post.objects.filter(owner=self.request.user)
+
+
+
+
+def dash_base(request):
+    context = {}
+    template_name = 'dashboard/base_dash.html'
+    return render(request,template_name,context)

@@ -10,7 +10,8 @@ from .views import *
 
 
 urlpatterns = [
-    url(r'^$',Dashboard,name="dashboard" ),
+    url(r'^$',Dashboard,name="dashboard" ), 
+    url(r'^dash_base$',dash_base,name="dash_base" ),
     url(r'^bich/$',DashboardPostListView.as_view(),name="dashboard-listing" ),
 
     

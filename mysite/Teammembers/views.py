@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView,CreateView,UpdateView,Dele
 from django.shortcuts import render
 from .models import Team_Meamber
 # Create your views here.
-
+from .forms import Team_MeamberForm
 
 class Team_MeamberListView(ListView):
     queryset = Team_Meamber.objects.all()
@@ -12,7 +12,17 @@ class Team_MeamberListView(ListView):
 
 
 class Team_MeamberCreateView(CreateView):
-    pass
+    form_class = Team_MeamberForm
+    #template_name = 'dashboard/team_member_create.html'
+
+    def form_valid(self,form):
+        instance = form.save(commit=False)
+        instance.owner = self.request.user
+        return super(Team_MeamberCreateView,self).form_valid(form)
+
+        
+        
+
 
 
 class Team_MeamberUpdateView(UpdateView):

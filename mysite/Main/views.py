@@ -4,8 +4,8 @@ from django.views.generic import ListView, DetailView,CreateView,UpdateView,Dele
 from django.shortcuts import render
 from .models import Post,Gallery
 from .forms import PostForm
+from django.http import Http404 ,HttpResponseRedirect
 
-from django.http import Http404
 # Create your views here.
 
 
@@ -19,10 +19,16 @@ class PostDetailView(DetailView):
     def get_queryset(self):
         return Post.objects.all()
 
+    def get_context_data(self,*args,**kwargs):
+        print(self.kwargs)
+        context = super(PostDetailView,self).get_context_data(*args,**kwargs)
+        print(context)
+        return context
+
 
 class PostCreateView(CreateView):
     form_class = PostForm
-    template_name = 'Main/post_create.html'
+    template_name = 'Main/post_create.html' #TODO This should be moved to the dashboard app forthe templates for easy management of the project 
 
     def form_valid(self,form):
         instance = form.save(commit=False)

@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 #from Main.views import
 from Main.models import Post
-
+from Teammembers.models import Team_Meamber
 
 ##The Dashboard Views From Here
 
@@ -21,6 +21,8 @@ def Dashboard(request):# incharge of the secong dmin panell for editing the webs
     return render(request,"dashboard/dashboard.html",context)
 
 
+## Delete from here 
+
 class DashboardPostListView(LoginRequiredMixin,ListView):
     template_name = 'Dashboard/listings.html'
     def get_queryset(self):
@@ -28,16 +30,22 @@ class DashboardPostListView(LoginRequiredMixin,ListView):
 
 
 
-class DashboardTeam_MembersListView(ListView):
-    pass
-    
+
+class DashboardTeam_MembersListView(LoginRequiredMixin,ListView):
+    template_name = 'dashboard/team-listing.html'
+    def get_queryset(self):
+        return Team_Meamber.objects.all()
 
 
 
+## Delete to here 
 
 
 
 def dash_base(request):
     context = {}
-    template_name = 'dashboard/base_dash.html'
+    template_name = 'dashboard/team-listing.html'#base_dash.html
     return render(request,template_name,context)
+
+
+

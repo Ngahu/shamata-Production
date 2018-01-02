@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from .models import Team_Meamber
 # Create your views here.
 from .forms import Team_MeamberForm
@@ -27,7 +27,7 @@ def team_member_createview(request):
         instance.save()
         # message success
         #messages.success(request, "Successfully Created")
-        return HttpResponseRedirect(instance.get_absolute_url())
+        return HttpResponseRedirect(instance.get_absolute_url_2())
     context = {
         "form": form,
         "title": "Create Member Listing",
@@ -38,8 +38,13 @@ def team_member_createview(request):
 
 
 
-
-
+def team_member_detailview(request,pk=None):
+    instance = get_object_or_404(Team_Meamber,pk=pk)
+    context = {
+        "instance": instance
+    }
+    template_name = 'dashboard/teammember_detail.html'
+    return render(request, template_name, context)
 
 
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from .models import Post,Gallery
 from .forms import PostForm
 from django.http import Http404 ,HttpResponseRedirect
@@ -61,7 +61,37 @@ def post_create(request):
 
 
 
+def edit_post(request,slug):
+    post =get_object_or_404(Post,slug=slug)
+    if request.method == "POST":
+        form = PostForm(request.POST,instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post_update
+            
 
+
+
+
+
+
+def post_update(request,slug=None):
+        # if not request.user.is_staff or not request.user.is_superuser:
+        #     raise Http404
+        
+    instance = get_object_or_404(Post, slug=slug)
+    form = PostForm(request.POST or None, request.FILES or None, instance=instance)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        return HttpResponseRedirect(instance.get_absolute_url())
+        context = {
+            "title": instance.title,
+            "instance": instance,
+            "form": form
+            }
+        template_name = 'Main/post_create.html'
+        return render(request, template_name, context)
 
 
 

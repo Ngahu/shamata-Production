@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'newsletter',
     'Teammembers',
     'dashboard',
+    'crispy_forms',
+    'phonenumber_field',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,6 +57,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mysite.urls'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 
 TEMPLATES = [
     {
@@ -117,6 +123,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITE_ID = 1
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/

@@ -6,6 +6,7 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 # phone number
 from phonenumber_field.modelfields import PhoneNumberField
+from django.core.urlresolvers import reverse
 # Create your models here.
 
 

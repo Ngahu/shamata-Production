@@ -19,11 +19,11 @@ class PostDetailView(DetailView):
     def get_queryset(self):
         return Post.objects.all()
 
-    def get_context_data(self,*args,**kwargs):
-        print(self.kwargs)
-        context = super(PostDetailView,self).get_context_data(*args,**kwargs)
-        print(context)
-        return context
+    # def get_context_data(self,*args,**kwargs):
+    #     print(self.kwargs)
+    #     context = super(PostDetailView,self).get_context_data(*args,**kwargs)
+    #     print(context)
+    #     return context
 
 
 class PostCreateView(CreateView):

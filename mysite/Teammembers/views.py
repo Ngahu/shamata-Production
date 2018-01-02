@@ -13,7 +13,7 @@ class Team_MeamberListView(ListView):
 
 class Team_MeamberCreateView(CreateView):
     form_class = Team_MeamberForm
-    #template_name = 'dashboard/team_member_create.html'
+    template_name = 'dashboard/team_member_create.html'
 
     def form_valid(self,form):
         instance = form.save(commit=False)
@@ -30,7 +30,7 @@ class Team_MeamberUpdateView(UpdateView):
 
 
 class Team_MeamberDetailView(DetailView):
-    pass
+    queryset = Team_Meamber.objects.all()
 
 
 class Team_MeamberDeleteView(DeleteView):

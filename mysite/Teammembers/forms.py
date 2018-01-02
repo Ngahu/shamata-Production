@@ -14,3 +14,7 @@ class Team_MeamberForm(forms.ModelForm):
             "members_email",
             "members_image"
             ]
+
+
+
+

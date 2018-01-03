@@ -5,7 +5,7 @@ from django.shortcuts import render,get_object_or_404
 from .models import Post,Gallery
 from .forms import PostForm
 from django.http import Http404 ,HttpResponseRedirect
-
+from django.shortcuts import redirect
 # Create your views here.
 
 
@@ -66,8 +66,21 @@ def edit_post(request,slug):
     if request.method == "POST":
         form = PostForm(request.POST,instance=post)
         if form.is_valid():
-            post = form.save(commit=False)
-            post_update
+            instance = form.save(commit=False)
+            #post = form.save(commit=False)
+            instance.owner = request.user
+            #post.owner = request.user
+            instance.save()
+            #post.save()
+            return HttpResponseRedirect(instance.get_absolute_url())
+            #return redirect('Main:list')
+    else:
+        form = PostForm(instance=post)
+    template_name = 'Main/post_create.html'
+    context = {
+        'form':form
+    }
+    return render(request, template_name, context)
             
 
 

@@ -23,7 +23,7 @@
             {{object.timestamp}}
 
     </div>
-<div> <a href="#"><button type="button">edit</button></a></div>
+<div> <a href="{% url   'Main:edit_post' slug=post.slug %}"><button type="button">edit</button></a></div>
 
 </body>
 </html>

@@ -2,10 +2,14 @@
 from __future__ import unicode_literals
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
 from django.shortcuts import render,get_object_or_404
+from django.contrib.contenttypes.models import ContentType
 from .models import Post,Gallery
 from .forms import PostForm
 from django.http import Http404 ,HttpResponseRedirect
 from django.shortcuts import redirect
+
+from Comments.models import Comment
+
 # Create your views here.
 
 
@@ -15,9 +19,12 @@ class PostListView(ListView):
 
 
 
+
+
 class PostDetailView(DetailView):
     def get_queryset(self):
         return Post.objects.all()
+
 
     # def get_context_data(self,*args,**kwargs):
     #     print(self.kwargs)
@@ -58,6 +65,25 @@ def post_create(request):
     template_name = 'Main/post_create.html'
     #template = 'property-create.html'
     return render(request, template_name, context)
+
+
+
+
+def post_detail(request,slug=None):#   showing details
+    instance = get_object_or_404(Post, slug=slug)
+    content_type = ContentType.objects.get_for_model(Post)
+    obj_id = instance.id
+    comments = Comment.objects.filter(content_type=content_type,object_id=obj_id) 
+    context = {
+        "instance": instance,
+        "comments":comments,
+    }
+    template_name = 'Main/detail.html'
+    return render(request,template_name, context)
+
+
+
+
 
 
 

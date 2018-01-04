@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+
+            <h1>DETAIL PAGE</h1>
+           Title:
+            {{instance.title}} <br>
+        
+             <!-- {% if instance.image %}<img src="{{ instance.image.url }}" alt="">   {% endif %} -->
+          <br>
+        
+            {{instance.location}} <br>
+           DEscription :: {{instance.description}} <br>
+            Size:{{instance.size_of_land}} <br>
+          Location::  {{instance.location_details}} <br>
+            {{instance.timestamp}}
+
+    </div>
+<div> <a href="#"><button type="button">edit</button></a></div>
+
+
+
+<div>
+   <h1> <p class="lead">Comments</p> </h1>
+    {% for comment in  comments %}
+    <div class="row">
+        {{ comment.content }}
+        Via {{ comment.owner}} on {{ comment.timestamp }}
+        <hr> 
+    </div>
+
+    {% endfor %}
+
+</div>
+</body>
+</html>

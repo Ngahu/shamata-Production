@@ -20,7 +20,6 @@ class Post(models.Model):
     owner =  models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     slug      =      models.SlugField(unique=True,blank=True, null=True)
-    location = models.CharField(max_length=150)
     image = models.ImageField(upload_to=upload_location)
     image_2 = models.ImageField(upload_to=upload_location)
     image_3 = models.ImageField(upload_to=upload_location,blank=True, null=True)

@@ -3,6 +3,9 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.db import models
 
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+
 User = settings.AUTH_USER_MODEL 
 
 from Main.models import Post
@@ -10,7 +13,10 @@ from Main.models import Post
 
 class Comment(models.Model):
     owner      = models.ForeignKey(User, on_delete=models.CASCADE)
-    post      = models.ForeignKey(Post)
+    #post      = models.ForeignKey(Post)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
     content   =  models.TextField()
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 

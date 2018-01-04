@@ -25,5 +25,12 @@
     </div>
 <div> <a href="{% url   'Main:edit_post' slug=post.slug %}"><button type="button">edit</button></a></div>
 
+
+
+<div>
+<h2>COMMENTS HERE </h2>
+{{ object.comment_set.all }}
+
+</div>
 </body>
 </html>

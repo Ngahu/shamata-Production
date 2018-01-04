@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'newsletter',
     'Teammembers',
     'dashboard',
+    'Comments',
+
+    #external
     'crispy_forms',
     'phonenumber_field',
 ]

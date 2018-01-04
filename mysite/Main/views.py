@@ -62,6 +62,10 @@ def post_create(request):
 
 
 def edit_post(request,slug):
+    #make sure that the one that is editing the post is an admin or super user
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+
     post =get_object_or_404(Post,slug=slug)
     if request.method == "POST":
         form = PostForm(request.POST,instance=post)

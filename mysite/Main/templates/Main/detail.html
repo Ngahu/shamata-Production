@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +30,10 @@
 
 <div>
    <h1> <p class="lead">Comments</p> </h1>
+  <form action="" method="POST"> {% csrf_token %}
+        {{comment_form|crispy }}
+        <input type="submit" value="Post Comment">
+  </form>
     {% for comment in  comments %}
     <div class="row">
         {{ comment.content }}

@@ -58,7 +58,7 @@ class Post(models.Model):
         qs = Comment.objects.filter_by_instance(instance)
         return qs
 
-     @property
+    @property
     def get_content_type(self):
         instance = self
         content_type = ContentType.objects.get_for_model(instance.__class__)

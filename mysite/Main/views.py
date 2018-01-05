@@ -6,9 +6,9 @@ from .models import Post,Gallery
 from .forms import PostForm
 from django.http import Http404 ,HttpResponseRedirect
 from django.shortcuts import redirect
-
+from django.contrib.contenttypes.models import ContentType
 from Comments.models import Comment
-
+from Comments.forms import CommentForm
 # Create your views here.
 
 
@@ -70,12 +70,30 @@ def post_create(request):
 
 def post_detail(request,slug=None):#   showing details
     instance = get_object_or_404(Post, slug=slug)
-    #content_type = ContentType.objects.get_for_model(Post)
-    #obj_id = instance.id
+
+    initial_data = {
+        "content_type":instance.get_content_type,
+        "object_id":instance.id
+    }
+    form = CommentForm(request.POST or None, initial=initial_data)
+    if form.is_valid():
+        #print(form.cleaned_data)
+        c_type = form.cleaned_data.get("content_type")
+        content_type = ContentType.objects.get(model=c_type)
+        obj_id = form.cleaned_data.get("object_id")
+        content_data = form.cleaned_data.get("content")
+        new_comment, created =  Comment.objects.get_or_create(
+                                owner = request.user,
+                                content_type = content_type,
+                                object_id = obj_id,
+                                content = content_data
+                                )        
+                                
     comments = instance.comments#Comment.objects.filter_by_instance(instance) 
     context = {
         "instance": instance,
         "comments":comments,
+        "comment_form":form,
     }
     template_name = 'Main/detail.html'
     return render(request,template_name, context)

@@ -5,6 +5,8 @@ from django.db import models
 from .utils import unique_slug_generator
 from django.db.models.signals import pre_save,post_save
 from django.core.urlresolvers import reverse
+from django.contrib.contenttypes.models import ContentType
+
 # Create your models here.
 
 User = settings.AUTH_USER_MODEL 
@@ -56,6 +58,11 @@ class Post(models.Model):
         qs = Comment.objects.filter_by_instance(instance)
         return qs
 
+     @property
+    def get_content_type(self):
+        instance = self
+        content_type = ContentType.objects.get_for_model(instance.__class__)
+        return content_type
 
 
 

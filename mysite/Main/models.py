@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 
 User = settings.AUTH_USER_MODEL 
 
+from Comments.models import Comment
 
 
 def upload_location(instance,filename):
@@ -47,6 +48,13 @@ class Post(models.Model):
 
     class Meta:
         ordering = ["-timestamp", "-updated"]
+    
+
+    @property
+    def comments(self):
+        instance = self
+        qs = Comment.objects.filter_by_instance(instance)
+        return qs
 
 
 

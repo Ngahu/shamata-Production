@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
 from django.shortcuts import render,get_object_or_404
-from django.contrib.contenttypes.models import ContentType
 from .models import Post,Gallery
 from .forms import PostForm
 from django.http import Http404 ,HttpResponseRedirect
@@ -71,9 +70,9 @@ def post_create(request):
 
 def post_detail(request,slug=None):#   showing details
     instance = get_object_or_404(Post, slug=slug)
-    content_type = ContentType.objects.get_for_model(Post)
-    obj_id = instance.id
-    comments = Comment.objects.filter(content_type=content_type,object_id=obj_id) 
+    #content_type = ContentType.objects.get_for_model(Post)
+    #obj_id = instance.id
+    comments = instance.comments#Comment.objects.filter_by_instance(instance) 
     context = {
         "instance": instance,
         "comments":comments,

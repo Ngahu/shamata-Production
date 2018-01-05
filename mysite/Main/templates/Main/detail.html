@@ -34,11 +34,28 @@
         {{comment_form|crispy }}
         <input type="submit" value="Post Comment">
   </form>
+  <h5> Real comments</h5>
     {% for comment in  comments %}
     <div class="row">
         {{ comment.content }}
-        Via {{ comment.owner}} on {{ comment.timestamp }}
-        <hr> 
+        Via {{ comment.owner}} on {{ comment.timestamp|timesince }}
+        <hr>
+
+        <blockquote>
+            {% for child_comment in  comment.children %}
+            {{ child_comment.content }}  <br>
+            Via {{ child_comment.owner}} on {{ child_comment.timestamp|timesince }}
+
+
+            
+            {% endfor %}
+        </blockquote>
+        <form action="" method="POST"> {% csrf_token %}
+                {{comment_form|crispy }}
+                <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                <input type="submit" value="Reply">
+          </form>
+
     </div>
 
     {% endfor %}

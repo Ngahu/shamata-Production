@@ -11,10 +11,14 @@ User = settings.AUTH_USER_MODEL
 
 
 class CommentManager(models.Manager):
+    def all(self):
+        qs = super(CommentManager,self).filter(parent=None)
+        return qs
+
     def filter_by_instance(self,instance):
         content_type = ContentType.objects.get_for_model(instance.__class__)# instance.__class__ a way to get python's class
         obj_id = instance.id
-        qs = super(CommentManager,self).filter(content_type=content_type,object_id=obj_id)
+        qs = super(CommentManager,self).filter(content_type=content_type,object_id=obj_id).filter(parent=None)
         return qs 
 
 

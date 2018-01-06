@@ -52,8 +52,9 @@ class Post(models.Model):
         return reverse("Main:edit_post",kwargs={"slug":self.slug})
 
     def get_delete_url(self):
-        return reverse("comments:delete", kwargs={"id": self.id})
-    
+        pass
+        # return reverse("Main:edit_post", kwargs={"slug":self.slug})
+
 
     class Meta:
         ordering = ["-timestamp", "-updated"]

@@ -40,7 +40,14 @@
             {{instance.timestamp}}
 
     </div>
-<div> <a href="{{instance.get_edit_url }}"><button type="button">edit</button></a></div>
+   
+    {% if not request.user.is_staff or not request.user.is_superuser %}
+       <p>hi there yo cannot delete</p>
+       {% else %}
+       <div> <a href="{{instance.get_edit_url }}"><button type="button">edit</button></a></div>
+    {% endif %}
+    
+
 
 
 <div>

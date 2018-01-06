@@ -46,6 +46,8 @@ class Team_Meamber(models.Model):
     def get_edit_url(self):
         return reverse("Teammembers:edit",kwargs={"id": self.id})
 
+    def get_delete_url(self):
+        return reverse("Teammembers:delete",kwargs={"id": self.id})
 
 
 

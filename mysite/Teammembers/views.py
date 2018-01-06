@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from .models import Team_Meamber
 # Create your views here.
 from .forms import Team_MeamberForm
@@ -72,6 +72,15 @@ def team_member_updateview(request,id=None):
 
 
 
+def team_member_deleteview(request,id=None):
+    instance = get_object_or_404(Team_Meamber,id=id)
+    instance.delete()
+    return redirect("Teammembers:list")
+
+
+
+
+
 
 # class Team_MeamberCreateView(CreateView):
 #     form_class = Team_MeamberForm
@@ -87,10 +96,4 @@ def team_member_updateview(request,id=None):
 
 
 
-class Team_MeamberUpdateView(UpdateView):
-    pass
 
-
-
-class Team_MeamberDeleteView(DeleteView):
-    pass

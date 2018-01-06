@@ -46,9 +46,29 @@ def team_member_detailview(request,id=None):
     template_name = 'dashboard/teammember_detail.html'
     return render(request, template_name, context)
 
+      
 
+def team_member_updateview(request,id=None):
+    #make sure that the one that is editing the post is an admin or super user
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
 
+    post =get_object_or_404(Team_Meamber,id=id)
+    if request.method == "POST":
+        form = Team_MeamberForm(request.POST,instance=post)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.owner = request.user
+            instance.save()
+            return HttpResponseRedirect(instance.get_absolute_url_2())
 
+    else:
+        form = Team_MeamberForm(instance=post)
+    template_name = 'dashboard/teammember_create.html'
+    context = {
+        'form':form
+    }
+    return render(request, template_name, context)
 
 
 

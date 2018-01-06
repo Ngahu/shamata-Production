@@ -48,6 +48,13 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("Main:post_detail",kwargs={"slug":self.slug})
 
+    def get_edit_url(self):
+        return reverse("Main:edit_post",kwargs={"slug":self.slug})
+
+    def get_delete_url(self):
+        return reverse("comments:delete", kwargs={"id": self.id})
+    
+
     class Meta:
         ordering = ["-timestamp", "-updated"]
     

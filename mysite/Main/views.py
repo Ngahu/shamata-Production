@@ -123,8 +123,8 @@ def edit_post(request,slug):
         raise Http404
 
     post =get_object_or_404(Post,slug=slug)
-    if request.method == "POST":
-        form = PostForm(request.POST,instance=post)
+    if request.method == "POST": 
+        form = PostForm(request.POST , request.FILES,instance=post)
         if form.is_valid():
             instance = form.save(commit=False)
             #post = form.save(commit=False)

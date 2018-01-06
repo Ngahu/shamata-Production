@@ -55,7 +55,7 @@ def team_member_updateview(request,id=None):
 
     post =get_object_or_404(Team_Meamber,id=id)
     if request.method == "POST":
-        form = Team_MeamberForm(request.POST,instance=post)
+        form = Team_MeamberForm(request.POST , request.FILES,instance=post)
         if form.is_valid():
             instance = form.save(commit=False)
             instance.owner = request.user

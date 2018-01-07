@@ -131,6 +131,8 @@ def post_deleteview(request,slug=None):
 ###The Gallery Views from here 
 
 
+
+
 def gallery_createview(request):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
@@ -161,10 +163,28 @@ def gallery_detail(request,id=None):
 
 
 
+def edit_gallery_post(request,id=None):
+    #make sure that the one that is editing the post is an admin or super user
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
 
+    post =get_object_or_404(Gallery,id=id)
+    if request.method == "POST": 
+        form = GalleryForm(request.POST , request.FILES,instance=post)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.owner = request.user
+            instance.save()
+            return HttpResponseRedirect(instance.get_gallery_absolute_url())
+            
+    else:
+        form = GalleryForm(instance=post)
+    template_name = 'gallery/gallery_create.html'
+    context = {
+        'form':form
+    }
+    return render(request, template_name, context)
 
-class GalleryUpdateView(UpdateView):
-    pass
 
 
 class GalleryDeleteView(DetailView):

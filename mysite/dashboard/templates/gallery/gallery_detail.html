@@ -18,7 +18,7 @@
         {% if not request.user.is_staff or not request.user.is_superuser %}
         <p>hi there yo cannot delete</p>
         {% else %}
-        <div> <a href="{{instance.get_edit_url }}"><button type="button">edit</button></a> <br>
+        <div> <a href="{{instance.get_gallery_edit_absolute_url}}"><button type="button">edit</button></a> <br>
             <a href="{{instance.get_delete_url }}"><button type="button">Delete</button></a>
         </div>
      {% endif %}

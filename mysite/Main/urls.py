@@ -12,6 +12,7 @@ from .views import(
      ### Gallery Urls
      gallery_createview,
      gallery_detail,
+     edit_gallery_post,
 
      #GalleryListView,
  
@@ -26,6 +27,7 @@ from .views import(
 
 
 urlpatterns = [
+    url(r'^(?P<id>\d+)/edit-gallery/$',edit_gallery_post,name='edit_gallery_post'),
     url(r'^$',PostListView.as_view(),name='list'),
     url(r'^create/$',PostCreateView.as_view(),name='create'),
     url(r'^post_create/',post_create,name="post_create" ),
@@ -36,6 +38,7 @@ urlpatterns = [
     #Galery
     url(r'^gallery_create/',gallery_createview,name="gallery_create" ),
     url(r'^(?P<id>\d+)/$',gallery_detail,name='gallery_detail'),
+    
 
 
     url(r'^(?P<slug>[\w-]+)/$', post_detail, name='post_detail'),

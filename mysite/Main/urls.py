@@ -2,10 +2,7 @@ from django.conf.urls import url
 
 from .views import(
      PostCreateView,
-     PostDetailView,
-     PostDeleteView,
      PostListView,
-     PostUpdateView,
      post_create,
      ### Gallery Urls
      GalleryListView,

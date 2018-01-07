@@ -168,19 +168,6 @@ def post_update(request,slug=None):
 
 
 
-class PostUpdateView(UpdateView):
-    pass
-
-
-class PostDeleteView(DeleteView):
-    pass
-
-
-
-
-
-
-
 ###The Gallery Views from here 
 
 class GalleryCreateView(CreateView):

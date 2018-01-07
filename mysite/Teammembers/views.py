@@ -3,14 +3,53 @@ from __future__ import unicode_literals
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import Team_Meamber
-# Create your views here.
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from .forms import Team_MeamberForm
 from django.http import Http404 ,HttpResponseRedirect
 
-
+#This is  not in use 
 #For the main Site  Listing 
 class Team_MeamberListView(ListView):
     queryset = Team_Meamber.objects.all()
+
+#This is  not in use 
+
+def team_list(request):
+    """
+    This View returns alist of all the teammembers in the database
+    """
+    queryset = Team_Meamber.objects.all()
+    context = {
+       "member_list":queryset,
+       "title":"List all members here "
+    }
+    template_name = 'Teammembers/team_list.html'
+    return render(request, template_name, context)
+
+
+def team_list_main_site(request):
+    """
+    This view is responsible to return a queryset paginated with only three team members
+    """
+    members_list = Team_Meamber.objects.all()
+    paginator = Paginator(members_list,1)
+    page = request.GET.get('page')
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        queryset = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        queryset = paginator.page(paginator.num_pages)
+
+    context = {
+       "member_list":queryset,
+       "title":"List Page for main website"
+    }
+    template_name = 'Teammembers/team_list_main.html'
+    return render(request, template_name, context)
+
 
 
 
@@ -76,23 +115,6 @@ def team_member_deleteview(request,id=None):
     instance = get_object_or_404(Team_Meamber,id=id)
     instance.delete()
     return redirect("Teammembers:list")
-
-
-
-
-
-
-# class Team_MeamberCreateView(CreateView):
-#     form_class = Team_MeamberForm
-#     template_name = 'dashboard/team_member_create.html'
-
-#     # def form_valid(self,form):
-#     #     instance = form.save(commit=False)
-#     #     instance.owner = self.request.user
-#     #     return super(Team_MeamberCreateView,self).form_valid(form)
-
-        
-        
 
 
 

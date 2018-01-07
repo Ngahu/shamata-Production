@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Post
+from .models import Post,Gallery
 
 class PostForm(forms.ModelForm):
     image = forms.ImageField(label='A must')
@@ -16,8 +16,6 @@ class PostForm(forms.ModelForm):
             "image",
             "image_2",
             "image_3",
-            "image_4",
-            "image_5",
             "location_details",
             "size_of_land",
             "price",
@@ -25,3 +23,11 @@ class PostForm(forms.ModelForm):
 
         ]
         
+class GalleryForm(forms.ModelForm):
+    class Meta:
+        model = Gallery
+        fields = [
+            'image_title',
+            'image_description',
+            'gallery_image'
+            ]

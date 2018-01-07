@@ -146,13 +146,21 @@ def gallery_createview(request):
         "form":form,
         "title":"Gallery Create Form"
     }
-    template_name = 'dashboard/gallery_create.html'
+    template_name = 'gallery/gallery_create.html'
+
     return render(request, template_name, context)
 
 
+def gallery_detail(request,id=None):
+    instance = get_object_or_404(Gallery,id=id)
+    context = {
+        "instance":instance
+    }
+    template_name = 'gallery/gallery_detail.html'
+    return render(request,template_name, context)
 
-class GalleryListView(ListView):
-    queryset = Gallery.objects.all()
+
+
 
 
 class GalleryUpdateView(UpdateView):

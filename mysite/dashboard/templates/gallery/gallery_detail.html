@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+  
+    Name::{{instance.image_title}}    <br>
+     {% if instance.gallery_image %}<img src="{{ instance.gallery_image.url }}" alt="">   {% endif %}  <br>
+
+     image_description::{{instance.image_description}} <br>
+     timestamp::{{instance.timestamp}}  <br>
+
+     <div>
+        {% if not request.user.is_staff or not request.user.is_superuser %}
+        <p>hi there yo cannot delete</p>
+        {% else %}
+        <div> <a href="{{instance.get_edit_url }}"><button type="button">edit</button></a> <br>
+            <a href="{{instance.get_delete_url }}"><button type="button">Delete</button></a>
+        </div>
+     {% endif %}
+     
+     </div>
+</body>
+</html>

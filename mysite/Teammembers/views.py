@@ -33,7 +33,8 @@ def team_list_main_site(request):
     """
     members_list = Team_Meamber.objects.all()
     paginator = Paginator(members_list,1)
-    page = request.GET.get('page')
+    page_request_var = "page"
+    page = request.GET.get(page_request_var)
     try:
         queryset = paginator.page(page)
     except PageNotAnInteger:

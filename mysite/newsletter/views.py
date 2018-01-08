@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from .models import Subscribe
 from .forms import SubscriptionForm
-from django.views.generic import  FormView
+from django.views.generic import  FormView, CreateView
 from .models import Subscribe
 
 #This view will be displaying a list of the emails that have subscribed to the news letter section 
@@ -18,6 +18,7 @@ def my_email_list(request):
 
 
 
-class SubscribeView(FormView):
+class SubscribeView(CreateView):
     template_name = 'newsletter/subscribe.html'
     form_class = SubscriptionForm
+    success_url = '/'

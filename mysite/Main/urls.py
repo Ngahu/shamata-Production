@@ -10,9 +10,11 @@ from .views import(
      PostCreateView,
      PostListView,
      ### Gallery Urls
+     gallery_list,
      gallery_createview,
      gallery_detail,
      edit_gallery_post,
+     gallery_deleteview,
 
      #GalleryListView,
  
@@ -36,8 +38,10 @@ urlpatterns = [
     
 
     #Galery
+    url(r'^gallery_list/',gallery_list,name="gallery_list" ),
     url(r'^gallery_create/',gallery_createview,name="gallery_create" ),
     url(r'^(?P<id>\d+)/$',gallery_detail,name='gallery_detail'),
+    url(r'^(?P<id>\d+)/gallery_deleteview/$',gallery_deleteview,name='gallery_deleteview'),
     
 
 

@@ -5,6 +5,7 @@ from .models import Subscribe
 from .forms import SubscriptionForm
 from django.views.generic import  FormView, CreateView
 from .models import Subscribe
+from django.contrib.messages.views import SuccessMessageMixin
 
 #This view will be displaying a list of the emails that have subscribed to the news letter section 
 
@@ -18,13 +19,16 @@ def my_email_list(request):
 
 
 
-class SubscribeView(CreateView):
+class SubscribeView(SuccessMessageMixin,CreateView):
     template_name = 'newsletter/subscribe.html'
     form_class = SubscriptionForm
     success_url = '/'
 
-    def form_valid(self,form):
-        email = form.cleaned_data.get("email")
-        #can do other things here like sending an email 
-        return super(SubscribeView,self).form_valid(form)
-    
+    def get_success_message(self,cleaned_data):
+        #see what the cleaned_data is
+        print(cleaned_data)
+
+    # def form_valid(self,form):
+    #     email = form.cleaned_data.get("email")
+    #     #can do other things here like sending an email 
+    #     return super(SubscribeView,self).form_valid(form)

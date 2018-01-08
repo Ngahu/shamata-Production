@@ -130,7 +130,14 @@ def post_deleteview(request,slug=None):
 
 ###The Gallery Views from here 
 
-
+def gallery_list(request):
+    queryset = Gallery.objects.all()
+    context = {
+        "queryset":queryset,
+        "title":"this is the gallery listview"
+    }
+    template_name = 'gallery/gallery_list.html'
+    return render(request, template_name, context)
 
 
 def gallery_createview(request):
@@ -186,9 +193,10 @@ def edit_gallery_post(request,id=None):
     return render(request, template_name, context)
 
 
-
-class GalleryDeleteView(DetailView):
-    pass
+def gallery_deleteview(request,id=None):
+    instance = get_object_or_404(Post,id=id)
+    instance.delete()
+    return redirect("Main:gallery_list")
 
 
 

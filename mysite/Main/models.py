@@ -105,6 +105,9 @@ class Gallery(models.Model):
     def get_gallery_edit_absolute_url(self):
         return reverse("Main:edit_gallery_post",kwargs={"id":self.id})
 
+    def get_gallery_delete_absolute_url(self):
+        return reverse("Main:gallery_deleteview",kwargs={"id":self.id})
+
 
     class Meta:
         ordering = ["-timestamp"]

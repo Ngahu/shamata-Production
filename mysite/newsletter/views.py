@@ -22,3 +22,9 @@ class SubscribeView(CreateView):
     template_name = 'newsletter/subscribe.html'
     form_class = SubscriptionForm
     success_url = '/'
+
+    def form_valid(self,form):
+        email = form.cleaned_data.get("email")
+        #can do other things here like sending an email 
+        return super(SubscribeView,self).form_valid(form)
+    

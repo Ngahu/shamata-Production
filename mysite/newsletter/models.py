@@ -14,3 +14,6 @@ class Subscribe(models.Model):
 
     def __unicode__(self):
         return self.email
+
+    def get_delete_url(self):
+        return reverse("newsletter:my_email_list",kwargs={"id": self.id})

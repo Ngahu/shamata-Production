@@ -32,3 +32,21 @@ class SubscribeView(SuccessMessageMixin,CreateView):
     #     email = form.cleaned_data.get("email")
     #     #can do other things here like sending an email 
     #     return super(SubscribeView,self).form_valid(form)
+
+
+
+def newsletter_detail(request,id=None):
+    instance = get_object_or_404(Subscribe,id=id)
+    context = {
+        "instance":instance
+    }
+    template_name = 'newsletter/                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                '
+    return render(request,template_name, context)
+
+
+
+
+def deleteview(request):
+    instance = get_object_or_404(Subscribe,id=id)
+    instance.delete()
+    return redirect("newsletter:my_email_list")

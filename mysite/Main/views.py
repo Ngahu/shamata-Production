@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
+from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView,View
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import Post,Gallery
 from .forms import PostForm,GalleryForm
@@ -9,18 +9,48 @@ from django.shortcuts import redirect
 from django.contrib.contenttypes.models import ContentType
 from Comments.models import Comment
 from Comments.forms import CommentForm
-# Create your views here.
-
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 #The home views .Basically the onces tht are going to be runing the website 
-class NameView(View):
-    def get(self, request, *args, **kwargs):
-        return HttpResponse('GET request!')
-
-    def post(self, request, *args, **kwargs):
-        return HttpResponse('POST request!')
 
 
+def post_list_main(request):
+    """
+    This view is responsible to return a queryset paginated with only ^ Properties   For the main Website 
+    """
+    post_list = Post.objects.all()
+    paginator = Paginator(post_list,3)
+    page_request_var = "page"
+    page = request.GET.get(page_request_var)
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        queryset = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        queryset = paginator.page(paginator.num_pages)
+
+    context = {
+       "post_list":queryset,
+       "title":"List Page for main website"
+    }
+    template_name = 'Main/post_list_main.html'
+    return render(request, template_name, context)
+
+
+
+
+
+
+
+
+
+
+def testing_view(request):
+    template_name = 'Main/navigation.html'
+    context = {}
+    return render(request, template_name, context)
 
 
 
@@ -40,6 +70,9 @@ class NameView(View):
 
 
 class PostListView(ListView):
+    """
+    This View returns alist of all the teammembers in the database
+    """
     queryset = Post.objects.all()
 
 

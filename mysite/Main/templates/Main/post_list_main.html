@@ -1,0 +1,18 @@
+{% extends "Main/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+  
+    <h1> post in post_list</h1>
+    {% for post in post_list %}
+    <li><a href="{{ post.get_absolute_url }}">{{ post }}</a></li>
+   Name:{{ post.title }} <br>   location:{{ post.location }} <br> category:{{ post.description }}  <br> Created:{{ post.timestamp }} <br>Updated:{{ post.updated }}
+    {% endfor %}
+
+
+ <hr>
+<a href="{% url   'Main:list_all' %}">View All Properties</a>
+
+
+{% endblock content %}

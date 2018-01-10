@@ -25,7 +25,7 @@ def team_list(request):
 
 def team_list_main_site(request):
     """
-    This view is responsible to return a queryset paginated with only three team members
+    This view is responsible to return a queryset paginated with only three team members  For the main Website 
     """
     members_list = Team_Meamber.objects.all()
     paginator = Paginator(members_list,3)

@@ -9,12 +9,15 @@ from .views import(
     ##
      PostCreateView,
      PostListView,
+     post_list_main,
      ### Gallery Urls
      gallery_list,
      gallery_createview,
      gallery_detail,
      edit_gallery_post,
      gallery_deleteview,
+
+     testing_view
 
      #GalleryListView,
  
@@ -29,9 +32,13 @@ from .views import(
 
 
 urlpatterns = [
+    url(r'^testing/$',testing_view,name='testing_view'),
     url(r'^(?P<id>\d+)/edit-gallery/$',edit_gallery_post,name='edit_gallery_post'),
-    url(r'^$',PostListView.as_view(),name='list'),
+    url(r'^all-properties/$',PostListView.as_view(),name='list_all'),
     url(r'^create/$',PostCreateView.as_view(),name='create'),
+    url(r'^post_list_main/$',post_list_main,name='post_list_main'),
+
+
     url(r'^post_create/',post_create,name="post_create" ),
     url(r'^(?P<slug>[\w-]+)/delete/$',post_deleteview,name='delete'),
     url(r'^(?P<slug>[\w-]+)/edit/$',edit_post,name='edit_post'),

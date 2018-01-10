@@ -12,6 +12,32 @@ from Comments.forms import CommentForm
 # Create your views here.
 
 
+#The home views .Basically the onces tht are going to be runing the website 
+class NameView(View):
+    def get(self, request, *args, **kwargs):
+        return HttpResponse('GET request!')
+
+    def post(self, request, *args, **kwargs):
+        return HttpResponse('POST request!')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class PostListView(ListView):
     queryset = Post.objects.all()

@@ -7,12 +7,12 @@ class Team_MeamberForm(forms.ModelForm):
     class Meta:
         model = Team_Meamber
         fields = [
-            "members_name",
-            "members_role",
-            "members_details",
-            "members_phone_number",
-            "members_email",
-            "members_image"
+            "name",
+            "role",
+            "details",
+            "phone_number",
+            "email",
+            "image"
             ]
 
 

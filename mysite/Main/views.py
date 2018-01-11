@@ -14,6 +14,24 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 #The home views .Basically the onces tht are going to be runing the website 
 
 
+
+def HomeView(request):
+    """
+    This is the Entry point of the Website .This view is responsible to render the index.html 
+    """
+    template_name= 'Main/index.html'
+    context = {
+        "title":"title is here "
+    }
+    return render(request, template_name, context)
+
+
+
+
+
+
+
+#also this is the home view the entry point of the website
 def post_list_main(request):
     """
     This view is responsible to return a queryset paginated with only 6 Properties   For the main Website 

@@ -41,10 +41,10 @@ def team_list_main_site(request):
         queryset = paginator.page(paginator.num_pages)
 
     context = {
-       "member_list":queryset,
+       "team_list":queryset,
        "title":"List Page for main website"
     }
-    template_name = 'Teammembers/team_list_main.html'
+    template_name = 'Teammembers/team_mainsite.html'
     return render(request, template_name, context)
 
 

@@ -1,27 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    Ellon Musk
+{% extends 'dashboard/base_dash.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
 
-    <hr>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                {% if form %}
-                <form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
-                {% comment %} {{ form | crispy }} {% endcomment %}
-                {{form.as_p}}
-                 <input type="submit" value="Create Post" class="btn btn-primary">
-                {% endif %}
-        </div>
-        </div>
-    </div>
-    <hr>
-</body>
-</html>
+
+{% block content %}
+
+
+<div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            {% if form %}
+                            <form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
+                            {{ form | crispy }}
+                             <input type="submit" value="Create Post" class="btn btn-primary">
+                            {% endif %}
+                    </div>
+                    </div>
+                </div>
+
+                  <footer>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                <p class="footer-info">© 2017 - <strong>ShamataRealEstate</strong> . All Rights Reserved. <span class="pull-right">Designed by <a href="#">Syolo</a></span></p>
+                </div>  <!-- / col-md-12 -->
+                </div>  <!-- / row -->
+            </div><!-- / container -->
+        </footer>
+
+{% endblock content %}

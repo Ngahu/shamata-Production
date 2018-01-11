@@ -12,7 +12,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 def my_email_list(request):
     queryset = Subscribe.objects.all()
     context = {
-        "queryset":queryset
+        "email_list":queryset
     }
     template_name = 'newsletter/newsletter_list.html'
     return render(request, template_name, context)

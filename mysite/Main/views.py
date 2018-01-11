@@ -67,7 +67,7 @@ def post_list_main(request):
 
 
 def testing_view(request):
-    template_name = 'Main/body.html'
+    template_name = 'Main/footer.html'
     context = {}
     return render(request, template_name, context)
 

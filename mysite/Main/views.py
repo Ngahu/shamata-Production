@@ -16,7 +16,7 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 def post_list_main(request):
     """
-    This view is responsible to return a queryset paginated with only ^ Properties   For the main Website 
+    This view is responsible to return a queryset paginated with only 6 Properties   For the main Website 
     """
     post_list = Post.objects.all()
     paginator = Paginator(post_list,3)
@@ -35,7 +35,8 @@ def post_list_main(request):
        "post_list":queryset,
        "title":"List Page for main website"
     }
-    template_name = 'Main/post_list_main.html'
+   # template_name = 'Main/post_list_main.html'
+    template_name = 'Main/latest_properties.html'
     return render(request, template_name, context)
 
 
@@ -65,6 +66,17 @@ def testing_view(request):
 
 
 
+def all_properties(request):
+    """
+    This View returns alist of all the Properties in the database
+    """
+    queryset = Post.objects.all()
+    context = {
+        "all_properties":queryset
+    }
+    template_name = 'Main/all_properties.html'
+    return render(request, template_name, context)
+    
 
 
 

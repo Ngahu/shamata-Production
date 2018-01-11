@@ -36,7 +36,7 @@ urlpatterns = [
     url(r'^(?P<id>\d+)/edit-gallery/$',edit_gallery_post,name='edit_gallery_post'),
     url(r'^all-properties/$',PostListView.as_view(),name='list_all'),
     url(r'^create/$',PostCreateView.as_view(),name='create'),
-    url(r'^post_list_main/$',post_list_main,name='post_list_main'),
+    url(r'^$',post_list_main,name='post_list_main'),
 
 
     url(r'^post_create/',post_create,name="post_create" ),

@@ -11,7 +11,8 @@
                                         <i class="fa fa-comments fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">26</div>
+                                            {% comment %} <div class="huge">{{comment_count.count}}</div> {% endcomment %}
+                                        <div class="huge">433</div>
                                         <div>New Comments!</div>
                                     </div>
                                 </div>
@@ -113,20 +114,12 @@
                 </div>
                 <!-- /.row -->
                 <div>
-                        {% include "newsletter/newsletter_list.html" %}
+                        {% include "newsletter/email_list.html" %}
                 </div>
             </div>
             <!-- /.container-fluid -->
              
-           <footer>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                <p class="footer-info">© 2018 - <strong>ShamataRealEstate</strong> . All Rights Reserved.</p>
-                </div>  <!-- / col-md-12 -->
-                </div>  <!-- / row -->
-            </div><!-- / container -->
-        </footer>
+          
 
 
         </div>

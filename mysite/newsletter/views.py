@@ -5,13 +5,16 @@ from .models import Subscribe
 from .forms import SubscriptionForm
 from django.views.generic import  FormView, CreateView
 from .models import Subscribe
+from Comments.models import Comment
 from django.contrib.messages.views import SuccessMessageMixin
 
 #This view will be displaying a list of the emails that have subscribed to the news letter section 
 
 def my_email_list(request):
     queryset = Subscribe.objects.all()
+    comment_count = Comment.objects.count()
     context = {
+        "comment_count":comment_count,
         "email_list":queryset
     }
     template_name = 'newsletter/newsletter_list.html'

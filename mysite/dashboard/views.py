@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 #from Main.views import
 from Main.models import Post
+from newsletter.models import Subscribe
 from Teammembers.models import Team_Meamber
 
 ##The Dashboard Views From Here
@@ -62,7 +63,9 @@ def new_dashboard(request):
 def dash_board(request):# incharge of the second admin panel for editing the website
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
+    qs = Subscribe.objects.all()
     context = {
+        "email_list":qs,
          "title":"Welcome to the  Dashboard",
          "title_small":" Admin Overview"
     }

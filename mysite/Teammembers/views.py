@@ -7,12 +7,6 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from .forms import Team_MeamberForm
 from django.http import Http404 ,HttpResponseRedirect
 
-#This is  not in use 
-#For the main Site  Listing 
-class Team_MeamberListView(ListView):
-    queryset = Team_Meamber.objects.all()
-
-#This is  not in use 
 
 def team_list(request):
     """
@@ -29,81 +23,12 @@ def team_list(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def team_list_main_site(request):
     """
     This view is responsible to return a queryset paginated with only three team members
     """
     members_list = Team_Meamber.objects.all()
-    paginator = Paginator(members_list,1)
+    paginator = Paginator(members_list,3)
     page_request_var = "page"
     page = request.GET.get(page_request_var)
     try:

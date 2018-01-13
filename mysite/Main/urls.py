@@ -1,14 +1,22 @@
 from django.conf.urls import url
 
 from .views import(
+    #Main Views
+    post_create,
+    post_detail,
+    edit_post,
+    post_deleteview,
+    ##
      PostCreateView,
      PostListView,
-     post_create,
      ### Gallery Urls
-     GalleryListView,
-     post_update,
-     edit_post,
-     post_detail
+     gallery_list,
+     gallery_createview,
+     gallery_detail,
+     edit_gallery_post,
+     gallery_deleteview,
+
+     #GalleryListView,
  
      
  )
@@ -21,15 +29,21 @@ from .views import(
 
 
 urlpatterns = [
+    url(r'^(?P<id>\d+)/edit-gallery/$',edit_gallery_post,name='edit_gallery_post'),
     url(r'^$',PostListView.as_view(),name='list'),
-    url(r'^gallery/$',GalleryListView.as_view(),name='gallery'),
     url(r'^create/$',PostCreateView.as_view(),name='create'),
     url(r'^post_create/',post_create,name="post_create" ),
-    #url(r'^(?P<slug>[\w-]+)/$',PostDetailView.as_view(),name='detail'),
-    # url(r'^(?P<slug>[\w-]+)/edit/$',post_update,name='post_update')
+    url(r'^(?P<slug>[\w-]+)/delete/$',post_deleteview,name='delete'),
     url(r'^(?P<slug>[\w-]+)/edit/$',edit_post,name='edit_post'),
-    url(r'^(?P<slug>[\w-]+)/$', post_detail, name='post_detail'),
     
-    #url(r'^restaurants/(?P<slug>[\w-]+)/$',RestaurantListView.as_view()),
-    #url(r'^',restaurant_listview,name="list" ),
+
+    #Galery
+    url(r'^gallery_list/',gallery_list,name="gallery_list" ),
+    url(r'^gallery_create/',gallery_createview,name="gallery_create" ),
+    url(r'^(?P<id>\d+)/$',gallery_detail,name='gallery_detail'),
+    url(r'^(?P<id>\d+)/gallery_deleteview/$',gallery_deleteview,name='gallery_deleteview'),
+    
+
+
+    url(r'^(?P<slug>[\w-]+)/$', post_detail, name='post_detail'),
 ]

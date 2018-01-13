@@ -26,8 +26,6 @@ class Post(models.Model):
     image = models.ImageField(upload_to=upload_location)
     image_2 = models.ImageField(upload_to=upload_location)
     image_3 = models.ImageField(upload_to=upload_location,blank=True, null=True)
-    image_4 = models.ImageField(upload_to=upload_location,blank=True, null=True)
-    image_5 = models.ImageField(upload_to=upload_location,blank=True, null=True)
     description = models.TextField()
     size_of_land = models.CharField(max_length=150)
     location_details = models.CharField(max_length=300)
@@ -52,8 +50,7 @@ class Post(models.Model):
         return reverse("Main:edit_post",kwargs={"slug":self.slug})
 
     def get_delete_url(self):
-        pass
-        # return reverse("Main:edit_post", kwargs={"slug":self.slug})
+        return reverse("Main:delete", kwargs={"slug":self.slug})
 
 
     class Meta:
@@ -99,6 +96,18 @@ class Gallery(models.Model):
 
     def __unicode__(self):
         return self.image_title
+
+
+    def get_gallery_absolute_url(self):
+        return reverse("Main:gallery_detail",kwargs={"id":self.id})
+
+
+    def get_gallery_edit_absolute_url(self):
+        return reverse("Main:edit_gallery_post",kwargs={"id":self.id})
+
+    def get_gallery_delete_absolute_url(self):
+        return reverse("Main:gallery_deleteview",kwargs={"id":self.id})
+
 
     class Meta:
         ordering = ["-timestamp"]

@@ -68,7 +68,7 @@ def post_list_main(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
     
-    team_member = Team_Meamber.objects.all().order_by("-timestamp")[:2]
+    team_member = Team_Meamber.objects.all().order_by("-timestamp")[:4] #This one is filtering and Displaying only four latest added Team Members
 
     context  = {
         "team_member":team_member,

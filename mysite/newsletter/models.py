@@ -5,6 +5,7 @@ from django.db import models
 
 # Create your models here.
 class Subscribe(models.Model):
+    name =models.CharField(max_length=50)
     email = models.EmailField()
     timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 

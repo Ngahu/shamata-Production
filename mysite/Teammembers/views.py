@@ -25,10 +25,10 @@ def team_list(request):
 
 def team_list_main_site(request):
     """
-    This view is responsible to return a queryset paginated with only three team members
+    This view is responsible to return a queryset paginated with only three team members  For the main Website 
     """
     members_list = Team_Meamber.objects.all()
-    paginator = Paginator(members_list,3)
+    paginator = Paginator(members_list,5)
     page_request_var = "page"
     page = request.GET.get(page_request_var)
     try:
@@ -41,10 +41,10 @@ def team_list_main_site(request):
         queryset = paginator.page(paginator.num_pages)
 
     context = {
-       "member_list":queryset,
+       "team_list":queryset,
        "title":"List Page for main website"
     }
-    template_name = 'Teammembers/team_list_main.html'
+    template_name = 'Teammembers/team_mainsite.html'
     return render(request, template_name, context)
 
 

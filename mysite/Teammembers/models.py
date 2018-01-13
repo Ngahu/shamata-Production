@@ -15,23 +15,23 @@ def upload_location(instance,filename):
 
 
 class Team_Meamber(models.Model):
-    members_name = models.CharField(max_length=100)
-    members_role = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    role = models.CharField(max_length=100)
     #slug = models.SlugField(unique=True)
-    members_details = models.TextField()
-    members_phone_number = PhoneNumberField(blank=True, null=True)
-    members_email = models.EmailField()
-    members_image = models.ImageField(upload_to=upload_location) #null=False,blank=False
-    # timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+    details = models.TextField()
+    phone_number = PhoneNumberField(blank=True, null=True)
+    email = models.EmailField()
+    image = models.ImageField(upload_to=upload_location) #null=False,blank=False
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     # updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     
 
     def __str__(self):
-        return self.members_name
+        return self.name
 
 
     def __unicode__(self):
-        return self.members_name
+        return self.name
 
 
     # def get_absolute_url(self):
@@ -41,7 +41,7 @@ class Team_Meamber(models.Model):
         return reverse("Teammembers:detail",kwargs={"id": self.id})
 
     def get_absolute_url_2(self):
-        return reverse("Teammembers:team_member_detailview",kwargs={"id": self.id})
+        return reverse("Teammembers:detail",kwargs={"id": self.id})
 
     def get_edit_url(self):
         return reverse("Teammembers:edit",kwargs={"id": self.id})

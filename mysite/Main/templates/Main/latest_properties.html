@@ -1,0 +1,63 @@
+{% extends "Main/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+
+  {% include "Main/navigation.html" %}
+
+   {% include "Main/body.html" %}
+   
+   
+
+   <!--MAKING OF THE SECTION CONTAINING THE FEATURED PROPERTIES SECTION -->
+<section class="section pv-30">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 text-center">
+			<h2 class="title"><span class="text-muted">FEATURED</span> <span class="text-default"> PROPERTIES</span></h2>
+				<div class="separator"></div>
+				</div>
+				</div>
+				</div>
+
+</section>
+
+<section>
+<div class="container-fluid">
+  <div class="row">
+      
+   {%  for post in post_list %}
+    <div class="col-sm-4">
+									<div class="image-box style-2 mb-20 bordered light-gray-bg">
+										<div class="overlay-container overlay-visible">
+											{% if post.image %}<img src="{{ post.image.url }}" alt=""> {% endif %}
+											<div class="overlay-bottom text-left">
+												<p class="lead margin-clear">{{ post.title}}</p>
+											</div>
+										</div>
+										<div class="body">
+											<p class="small mb-10 text-muted"><i class="icon-calendar"></i>{{  post.timestamp }} <i class="fa fa-map-marker"></i> {{  post.location_details }} </p>
+											<p>   {{  post.description }}</p>											<a href="{{ post.get_absolute_url }}" class="btn btn-default btn-sm btn-hvr hvr-sweep-to-right margin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>
+										</div>
+									</div>
+								</div> <!-- col-sm-4 -->
+                  {% endfor %}
+  </div><!-- row -->
+                         <div class="row">
+		<div class="col-md-8 col-md-offset-2 text-center">
+            <a href="" class="btn btn-default-transparent btn-hvr hvr-shutter-in-vertital">View More Properties</a>
+				</div>
+				</div>
+</div> <!--container-fluid -->
+</section>
+
+
+{% include "Teammembers/testing.html" %}
+
+{% include "newsletter/subscribe.html" %}
+
+{% include "Main/footer.html" %}
+
+{% endblock content %}

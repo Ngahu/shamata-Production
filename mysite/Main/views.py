@@ -11,9 +11,28 @@ from Comments.models import Comment
 from Comments.forms import CommentForm
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
+
+
+from Teammembers.models import Team_Meamber 
+
+
+
+###############################
+def dash_board(request):# incharge of the second admin panel for editing the website
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+    qs = Subscribe.objects.all()
+    context = {
+        "email_list":qs,
+         "title":"Welcome to the  Dashboard",
+         "title_small":" Admin Overview"
+    }
+    return render(request,"dashboard/dashboard.html",context)
+
+
+
+
 #The home views .Basically the onces tht are going to be runing the website 
-
-
 
 def HomeView(request):
     """
@@ -48,8 +67,10 @@ def post_list_main(request):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
-
+    
+    team_member = Team_Meamber.objects.all() #TODO Create a modelManager for this.
     context = {
+        "team_member":team_member,
        "post_list":queryset,
        "title":"List Page for main website"
     }

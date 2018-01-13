@@ -27,11 +27,11 @@ class Team_Meamber(models.Model):
     
 
     def __str__(self):
-        return self.members_name
+        return self.name
 
 
     def __unicode__(self):
-        return self.members_name
+        return self.name
 
 
     # def get_absolute_url(self):

@@ -16,6 +16,6 @@ urlpatterns = [
     url(r'^team_list_main_site/$',team_list_main_site,name="main-list" ),
     url(r'^(?P<id>\d+)/edit/$',team_member_updateview,name='edit'),
     url(r'^(?P<id>\d+)/delete/$',team_member_deleteview,name='delete'),
-    url(r'^(?P<id>\d+)/$',team_member_detailview,name='team_member_detailview'),
+    url(r'^(?P<id>\d+)/$',team_member_detailview,name='detail') #'team_member_detailview'
     
 ]

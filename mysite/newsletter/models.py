@@ -32,6 +32,7 @@ class Testimony(models.Model):
     owner      = models.ForeignKey(User, on_delete=models.CASCADE)
     subject    = models.CharField(max_length=100)
     testimony  = models.TextField()
+    featured = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 
 

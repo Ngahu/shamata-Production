@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from .models import Subscribe
 from .forms import SubscriptionForm
-from django.views.generic import  FormView, CreateView
+from django.views.generic import  FormView, CreateView,DetailView,DeleteView
 from .models import Subscribe
 from Comments.models import Comment
 from django.contrib.messages.views import SuccessMessageMixin
@@ -53,3 +53,31 @@ def deleteview(request):
     instance = get_object_or_404(Subscribe,id=id)
     instance.delete()
     return redirect("newsletter:my_email_list")
+
+
+
+
+
+
+
+
+
+
+
+
+####THe testimonies Views 
+
+class SubmitTestimonyView(CreateView):
+    pass
+
+
+
+class TestimonyDetailView(DetailView):
+    pass
+
+
+class TestimonyDeleteView(DeleteView):
+    pass
+    
+
+

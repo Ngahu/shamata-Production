@@ -68,11 +68,12 @@ def post_list_main(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         queryset = paginator.page(paginator.num_pages)
     
-    team_member = Team_Meamber.objects.all() #TODO Create a modelManager for this.
-    context = {
+    team_member = Team_Meamber.objects.all().order_by("-timestamp")[:2]
+
+    context  = {
         "team_member":team_member,
-       "post_list":queryset,
-       "title":"List Page for main website"
+        "post_list":queryset,
+
     }
    # template_name = 'Main/post_list_main.html'
     template_name = 'Main/latest_properties.html'

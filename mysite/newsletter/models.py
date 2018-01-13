@@ -36,7 +36,7 @@ class Testimony(models.Model):
 
 
     def __unicode__(self):
-        return str(self.owner   )
+        return str(self.owner)
 
     class  Meta:
         ordering = ["-timestamp"]

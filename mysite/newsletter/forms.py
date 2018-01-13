@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Subscribe
+from .models import Subscribe,Testimony
 
 class SubscriptionForm(forms.ModelForm):
     class Meta:
@@ -15,3 +15,15 @@ class SubscriptionForm(forms.ModelForm):
             print('exists')
             raise forms.ValidationError("Sorry This Email is Already Subscribed.. ")
         return email
+
+
+
+class TestimonyForm(forms.ModelForm):
+    image = forms.ImageField(label='Your Image Please ')
+    class Meta:
+        model = Testimony
+        fields = [
+            "image",
+            "subject",
+            "testimony"
+        ]

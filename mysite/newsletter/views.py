@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render
 from .models import Subscribe
-from .forms import SubscriptionForm
+from .forms import SubscriptionForm,TestimonyForm
 from django.views.generic import  FormView, CreateView,DetailView,DeleteView
 from .models import Subscribe
 from Comments.models import Comment
@@ -67,8 +67,26 @@ def deleteview(request):
 
 ####THe testimonies Views 
 
-class SubmitTestimonyView(CreateView):
+def testimonycreateview(request):
     pass
+
+
+
+
+class SubmitTestimonyView(CreateView):
+    form_class = TestimonyForm
+    template_name = 'testimony/testimony_create.html'
+    success_url = "/"
+
+
+    def form_valid(self,form):
+        instance = form.save(commit=False)
+        instance.owner = self.request.user
+        return super(SubmitTestimonyView,self).form_valid(form)
+    
+
+
+
 
 
 
@@ -78,6 +96,6 @@ class TestimonyDetailView(DetailView):
 
 class TestimonyDeleteView(DeleteView):
     pass
-    
+
 
 

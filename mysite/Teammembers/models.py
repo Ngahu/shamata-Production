@@ -41,7 +41,7 @@ class Team_Meamber(models.Model):
         return reverse("Teammembers:detail",kwargs={"id": self.id})
 
     def get_absolute_url_2(self):
-        return reverse("Teammembers:team_member_detailview",kwargs={"id": self.id})
+        return reverse("Teammembers:detail",kwargs={"id": self.id})
 
     def get_edit_url(self):
         return reverse("Teammembers:edit",kwargs={"id": self.id})

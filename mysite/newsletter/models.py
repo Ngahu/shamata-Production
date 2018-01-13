@@ -6,7 +6,9 @@ from django.db import models
 User = settings.AUTH_USER_MODEL
 
 
-# Create your models here.
+def upload_location(instance,filename):
+    return "%s/%s" %(instance.id,filename)
+
 
 class Subscribe(models.Model):
     name =models.CharField(max_length=50)
@@ -32,6 +34,7 @@ class Testimony(models.Model):
     owner      = models.ForeignKey(User, on_delete=models.CASCADE)
     subject    = models.CharField(max_length=100)
     testimony  = models.TextField()
+    image = models.ImageField(upload_to=upload_location,blank=True, null=True)
     featured = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 

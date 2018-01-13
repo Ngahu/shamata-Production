@@ -18,6 +18,7 @@ from .views import(
      edit_gallery_post,
      gallery_deleteview,
 
+     all_properties,
      testing_view
 
      #GalleryListView,
@@ -34,6 +35,7 @@ from .views import(
 
 urlpatterns = [
     url(r'^testing/$',testing_view,name='testing_view'),
+    url(r'^all/$',all_properties,name='all'),
     url(r'^(?P<id>\d+)/edit-gallery/$',edit_gallery_post,name='edit_gallery_post'),
     url(r'^all-properties/$',PostListView.as_view(),name='list_all'),
     #url(r'^create/$',PostCreateView.as_view(),name='create'),

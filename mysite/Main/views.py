@@ -133,7 +133,7 @@ def post_deleteview(request,slug=None):
 def gallery_list(request):
     queryset = Gallery.objects.all()
     context = {
-        "queryset":queryset,
+        "gallery_list":queryset,
         "title":"this is the gallery listview"
     }
     template_name = 'gallery/gallery_list.html'

@@ -1,4 +1,4 @@
-web: gunicorn gettingstarted.wsgi
+web: gunicorn mysite.wsgi
 
 
 

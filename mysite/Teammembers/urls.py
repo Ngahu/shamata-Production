@@ -6,11 +6,17 @@ from .views import (
     team_member_updateview,
     team_member_deleteview,
     team_list,
-    team_list_main_site
+    team_list_main_site,
+    agents_list
 
 )
 
 urlpatterns = [ 
+
+    url(r'^agents_list/$',agents_list,name="agents_list" ),
+
+
+
     url(r'^team_member_create/$',team_member_createview,name="team_member_create" ),
     url(r'^list/$',team_list,name="list" ),
     url(r'^team_list_main_site/$',team_list_main_site,name="main-list" ),

@@ -22,6 +22,16 @@ def team_list(request):
 
 
 
+def agents_list(request):
+    ###This is the listing of the team in the main site
+    agent_list = Team_Meamber.objects.all()[:4]
+    context = {
+        "agents_list":agent_list
+    }
+    template_name = 'Teammembers/main.html'
+    return render(request, template_name, context)
+
+
 
 def team_list_main_site(request):
     """

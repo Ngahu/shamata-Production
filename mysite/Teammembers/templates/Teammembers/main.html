@@ -1,0 +1,55 @@
+{% extends "Main/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  {% include "Main/navigation.html" %}
+
+
+
+    <!--MAKING OF THE AGENTS SECTION -->
+<section class="section pv-30">
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 text-center">
+			<h2 class="title"><span class="text-muted">AGENTS YOU CAN</span> <span class="text-default"> TRUST </span></h2>
+				<div class="separator"></div>
+				</div>
+				</div>
+				</div>
+
+</section>
+
+
+
+
+
+
+
+<div class="container-fluid">
+	<div class="row grid-space-10">
+		{%  for agent in agents_list %}
+		<div class="col-sm-6 col-md-3">
+									<div class="team-member image-box style-2 mb-20 dark-bg text-center">
+										<div class="overlay-container overlay-visible">
+											<img src="{{ agent.image.url }}" alt="" class="img-responsive">
+											
+										</div>
+										<div class="body">
+											<h3 class="margin-clear">{{agent.name}}</h3>
+											<small>{{agent.role}}</small>
+											<div class="separator mt-10"></div>
+
+											<a href="#" class="btn btn-lg-link link-light"><i class="pr-10 fa fa-envelope-o"></i>Contact Me</a>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+
+	</div><!-- row grid-space-10 -->
+</div> <!--  container-fluid -->
+
+
+
+
+
+{% endblock content %}

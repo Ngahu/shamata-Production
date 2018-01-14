@@ -13,6 +13,31 @@ from Comments.forms import CommentForm
 
 
 
+
+def HomeView(request):
+    """"
+    This is the home View.Its the Entry Point of the project.This will render the homepage.
+    """
+    qs = Post.objects.all()[:6] #limiting the queryset to only 6 posts
+    context = {
+        "post_list":qs,
+        "title":"title is here"
+    }
+    template_name = 'Main/index.html'
+    return render(request, template_name, context)
+
+
+
+
+
+
+
+
+
+
+
+
+
 class PostListView(ListView):
     queryset = Post.objects.all()
 

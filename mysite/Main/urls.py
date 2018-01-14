@@ -2,6 +2,7 @@ from django.conf.urls import url
 
 from .views import(
     #Main Views
+    HomeView,
     post_create,
     post_detail,
     edit_post,
@@ -29,8 +30,9 @@ from .views import(
 
 
 urlpatterns = [
+    url(r'^$',HomeView,name='home-view'),
     url(r'^(?P<id>\d+)/edit-gallery/$',edit_gallery_post,name='edit_gallery_post'),
-    url(r'^$',PostListView.as_view(),name='list'),
+    url(r'^main-listing/$',PostListView.as_view(),name='list'),
     url(r'^create/$',PostCreateView.as_view(),name='create'),
     url(r'^post_create/',post_create,name="post_create" ),
     url(r'^(?P<slug>[\w-]+)/delete/$',post_deleteview,name='delete'),

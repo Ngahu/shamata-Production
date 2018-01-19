@@ -3,13 +3,55 @@ from __future__ import unicode_literals
 from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import Post,Gallery
-from .forms import PostForm,GalleryForm
+from .forms import PostForm,GalleryForm,ContactForm
 from django.http import Http404 ,HttpResponseRedirect
-from django.shortcuts import redirect
 from django.contrib.contenttypes.models import ContentType
 from Comments.models import Comment
 from Comments.forms import CommentForm
-# Create your views here.
+from Teammembers.models import Team_Meamber
+from django.conf import settings
+from django.core.mail import send_mail
+
+
+def contact(request):
+    form = ContactForm(request.POST or None)
+    title = 'Drop Us A Line'
+    confirm_message = None
+   
+    if form.is_valid():
+        print request.POST
+        print form.cleaned_data['email']
+
+        name = form.cleaned_data['name']
+        comment = form.cleaned_data['comment']
+        subject = 'Message  From Shamata Website'
+        message = '%s %s' %(comment,name)
+        emailFrom = form.cleaned_data['email']
+        emailTo = [settings.EMAIL_HOST_EMAIL]
+        send_mail(subject,message,emailFrom,emailTo,fail_silently=False,)
+
+        #after the email is successfully sent by the user 
+        title = "Message Sent!"
+        confirm_message = "Thankyou for your message .We will get back to you as soon as we can!."
+        form = None
+
+    context = {
+        "title":title,
+        "form":form,
+        "confirm_message":confirm_message
+    }
+    template_name = 'Main/contact.html'
+    return render(request,template_name,context)
+
+
+
+#this is for the testing detail page
+def test(request):
+    context = {
+        "Title":"title"
+    }
+    template_name = 'Main/test.html'
+    return render(request, template_name, context)
 
 
 
@@ -19,7 +61,9 @@ def HomeView(request):
     This is the home View.Its the Entry Point of the project.This will render the homepage.
     """
     qs = Post.objects.all()[:6] #limiting the queryset to only 6 posts
+    agent_list = Team_Meamber.objects.all()[:4]#Filtering only four teammembers
     context = {
+        "agents_list":agent_list,
         "post_list":qs,
         "title":"title is here"
     }
@@ -28,28 +72,22 @@ def HomeView(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-class PostListView(ListView):
+def all_properties(request):
     queryset = Post.objects.all()
+    context = {
+        "all_properties":queryset
+    }
+    template_name = 'Main/all_properties.html'
+    return render(request, template_name, context)
 
+# class PostCreateView(CreateView):
+#     form_class = PostForm
+#     template_name = 'Main/post_create.html' #TODO This should be moved to the dashboard app forthe templates for easy management of the project 
 
-class PostCreateView(CreateView):
-    form_class = PostForm
-    template_name = 'Main/post_create.html' #TODO This should be moved to the dashboard app forthe templates for easy management of the project 
-
-    def form_valid(self,form):
-        instance = form.save(commit=False)
-        instance.owner = self.request.user
-        return super(PostCreateView,self).form_valid(form)
+#     def form_valid(self,form):
+#         instance = form.save(commit=False)
+#         instance.owner = self.request.user
+#         return super(PostCreateView,self).form_valid(form)
 
 
 
@@ -155,6 +193,19 @@ def post_deleteview(request,slug=None):
 
 ###The Gallery Views from here 
 
+def gallery(request):
+    queryset = Gallery.objects.all()
+    context = {
+        "gallery_all":queryset
+    }
+    template_name = 'gallery/gallery.html'
+    return render(request, template_name, context)
+
+
+
+
+
+
 def gallery_list(request):
     queryset = Gallery.objects.all()
     context = {
@@ -222,6 +273,8 @@ def gallery_deleteview(request,id=None):
     instance = get_object_or_404(Post,id=id)
     instance.delete()
     return redirect("Main:gallery_list")
+
+
 
 
 

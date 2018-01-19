@@ -1,0 +1,112 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- jQuery library -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+
+            <h1>DETAIL PAGE</h1>
+           Title:
+            {{instance.title}} <br>
+        
+             <!-- {% if instance.image %}<img src="{{ instance.image.url }}" alt="">   {% endif %} -->
+          <br>
+        
+            {{instance.location}} <br>
+           DEscription :: {{instance.description}} <br>
+            Size:{{instance.size_of_land}} <br>
+          Location::  {{instance.location_details}} <br>
+            {{instance.timestamp}}
+
+    </div>
+   
+    {% if not request.user.is_staff or not request.user.is_superuser %}
+       <p>hi there yo cannot delete</p>
+       {% else %}
+       <div> 
+           <a href="{{instance.get_edit_url }}"><button type="button">edit</button></a>
+           <a href="{{instance.get_delete_url }}"><button type="button">Delete</button></a>
+        </div>
+    {% endif %}
+    
+
+
+
+<div>
+   <h1> <p class="lead">Comments</p> </h1>
+  <form action="" method="POST"> {% csrf_token %}
+        {{comment_form|crispy }}
+        <input type="submit" value="Post Comment">
+  </form>
+  <h1> Real comments</h1>
+    {% for comment in  comments %}
+   
+        {{ comment.content }}
+        Via {{ comment.owner}} on {{ comment.timestamp|timesince }}
+
+        {% if comment.children.count > 0 %} {{comment.children.count}}Comment{% if comment.children.count > 1 %}s{% endif %} |
+          
+        {% endif %}
+       
+       <a class="comment-reply-btn" href="#">Reply</a>
+       
+        <hr>
+
+        <div class="comment-reply" style="display:none;">
+       
+        <blockquote>
+            {% for child_comment in  comment.children %}
+            {{ child_comment.content }}  <br>
+            Via {{ child_comment.owner}} on {{ child_comment.timestamp|timesince }}
+
+
+            
+            {% endfor %}
+        </blockquote>
+        <form action="" method="POST"> {% csrf_token %}
+                {{comment_form|crispy }}
+                <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                <input type="submit" value="Reply">
+          </form>
+
+          </div>  <!-- comment-reply -->
+         
+
+
+
+    {% endfor %}
+
+</div>
+
+<script>
+    $(document).ready(function(){ 
+        $(".comment-reply-btn").click(function(event){
+            event.preventDefault();
+            $(".comment-reply").fadeToggle();
+            console.log("hello ");
+        })
+    });
+</script>
+</body>
+</html>

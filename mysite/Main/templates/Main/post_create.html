@@ -3,22 +3,25 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+     <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                                    {% if form %}
+                                    <h1 style="text-align:center;">POST CREATE FORM</h1>
+                                    <form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
+                                    {{ form | crispy }}
+                                    <!-- {{form.as_p}} -->
+                                     <input type="submit" value="Create Post" class="btn btn-success">
+                                    {% endif %}
 
-    <!-- /.row -->
-       <div class="container" style="text-align:center;">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            {% if form %}
-                            <h1 style="text-align:center;">POST CREATE FORM</h1>
-                            <form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
-                            {{ form | crispy }} 
-                            <!-- {{form.as_p}} -->
-                             <input type="submit" value="Create Post" class="btn btn-success">
-                            {% endif %}
-                    </div>
+
                     </div>
                 </div>
-            
+            </div>
+
+
+
+
 
 
 {% endblock content %}

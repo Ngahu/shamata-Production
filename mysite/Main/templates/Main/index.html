@@ -2,9 +2,9 @@
 {% load staticfiles %}
 
 {% block content %}
-  {% comment %} {% include "Main/navigation.html" %}
+   {% include "Main/navigation.html" %}
 
-   {% include "body.html" %} {% endcomment %}
+  {% include "Main/body.html" %}
 
    <!--MAKING OF THE SECTION CONTAINING THE FEATURED PROPERTIES SECTION -->
 <section class="section pv-30">
@@ -33,15 +33,16 @@
 										</div>
 										<div class="body">
 											<p class="small mb-10 text-muted"><i class="icon-calendar"></i>{{  post.timestamp }} <i class="fa fa-map-marker"></i> {{  post.location_details }} </p>
-											<p>   {{  post.description }}</p>											<a href="{{ post.get_absolute_url }}" class="btn btn-default btn-sm btn-hvr hvr-sweep-to-right margin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>
+											<p>   {{  post.description|truncatechars:50 }}</p>											<a href="{{ post.get_absolute_url }}" class="btn btn-default btn-sm btn-hvr hvr-sweep-to-right margin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>
 										</div>
 									</div>
 								</div> <!-- col-sm-4 -->
-                  {% endfor %}
+				  {% endfor %}
+				  <div class="clearfix"></div>
   </div><!-- row -->
                          <div class="row">
 		<div class="col-md-8 col-md-offset-2 text-center">
-            <a href="#" class="btn btn-default-transparent btn-hvr hvr-shutter-in-vertital">View More Properties</a>
+            <a href="{% url   'Main:all_properties' %}" class="btn btn-default-transparent btn-hvr hvr-shutter-in-vertital">View More Properties</a>
 				</div>
 				</div>
 </div> <!--container-fluid -->
@@ -52,11 +53,11 @@
 
 
 
+{% include "Teammembers/main_main.html" %}
 
 
+     {% include "Main/testimony.html" %}
 
-     {% comment %} {% include "testimony.html" %}
-
-      {% include "footer.html" %} {% endcomment %}
+      {% include "Main/footer.html" %} 
 
 {% endblock content %}

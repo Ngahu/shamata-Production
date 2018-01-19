@@ -87,7 +87,7 @@ pre_save.connect(Post_pre_save_receiver,sender=Post)
 
 class Gallery(models.Model):
     image_title        =  models.CharField(max_length=100)
-    image_description  =  models.TextField()
+    image_description  =  models.TextField(blank=True, null=True)
     gallery_image      =  models.ImageField(upload_to=upload_location,blank=True, null=True)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True,blank=True, null=True)
 

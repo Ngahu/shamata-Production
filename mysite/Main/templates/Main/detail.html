@@ -1,112 +1,133 @@
-{% load crispy_forms_tags %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- jQuery library -->
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+{% extends "Main/base.html" %}
 
 
+{% block content %}
+  {% include "Main/navigation.html" %}
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+				<!-- =============================================================================================== -->
 
-    <title>Document</title>
-</head>
-<body>
+			<!-- breadcrumb start -->
+			<!-- ================ -->
+			<div class="breadcrumb-container">
+				<div class="container">
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home pr-10"></i><a href="#">Home</a></li>
+						<li class="active">{{instance.title}}</li>
+					</ol>
+				</div>
+			</div>
+			<!-- breadcrumb end -->
 
-    <div>
+			<!-- main-container start -->
+			<!-- ================ -->
+			<section class="main-container padding-bottom-clear">
 
-            <h1>DETAIL PAGE</h1>
-           Title:
-            {{instance.title}} <br>
-        
-             <!-- {% if instance.image %}<img src="{{ instance.image.url }}" alt="">   {% endif %} -->
-          <br>
-        
-            {{instance.location}} <br>
-           DEscription :: {{instance.description}} <br>
-            Size:{{instance.size_of_land}} <br>
-          Location::  {{instance.location_details}} <br>
-            {{instance.timestamp}}
+				<div class="container">
+					<div class="row">
 
-    </div>
-   
-    {% if not request.user.is_staff or not request.user.is_superuser %}
-       <p>hi there yo cannot delete</p>
-       {% else %}
-       <div> 
-           <a href="{{instance.get_edit_url }}"><button type="button">edit</button></a>
-           <a href="{{instance.get_delete_url }}"><button type="button">Delete</button></a>
+					    <div class="container">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+
+
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+
+            <div class="item active">
+             {% if instance.image %}<img src="{{ instance.image.url }}" alt="Los Angeles" style="width:100%;">{% endif %}
+              <div class="carousel-caption">
+              </div>
+            </div>
+
+            <div class="item">
+                    {% if instance.image %}<img src="{{ instance.image_2.url }}" alt="Los Angeles" style="width:100%;">{% endif %}
+              <div class="carousel-caption">
+
+              </div>
+            </div>
+
+            <div class="item">
+                    {% if instance.image %}<img src="{{ instance.image_3.url }}" alt="Los Angeles" style="width:100%;">{% endif %}
+              <div class="carousel-caption">
+
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
-    {% endif %}
-    
+      </div>
+
+
+						<div class="pv-40">
+							<!-- main start -->
+							<!-- ================ -->
+							<div class="main col-md-8">
+								<h1 class="title">{{instance.title}}</h1>
+								<div class="separator-2"></div>
+								<p>{{instance.description}}.</p>
+								<h3 class="title">Features.</h3>
+								<ul class="list-icons">
+									<li><i class="icon-check"></i> {{instance.features}}.</li>
+								{% comment %}	<li><i class="icon-check"></i>  {{instance.features}}.</li>
+									<li><i class="icon-check"></i> {{instance.features}}</li>
+									<li><i class="icon-check"></i>  {{instance.features}}.</li>    {% endcomment %}
+								</ul>
+
+
+								<hr>
+
+							</div>
+							<!-- main end -->
+
+							<!-- sidebar start -->
+							<!-- ================ -->
+							<aside class="col-md-4 col-lg-3 col-lg-offset-1">
+								<div class="sidebar">
+									<div class="block clearfix">
+										<h3 class="title">Property Details</h3>
+										<div class="separator-2"></div>
+										<ul class="list margin-clear">
+											<li><strong>Status: </strong> <span class="text-right">On Sale</span></li>
+											<li><strong>Available Since <Since></Since>: </strong> <span class="text-right"> {{ instance.timestamp }} </span></li>
+											<li><strong>Location: </strong> <span class="text-right">{{ instance.location_details }}</span></li>
+											<li><strong>Price: </strong> <span class="text-right">KSHS:{{ instance.price }} </span></li>
+											<li><strong>Size: </strong> <span class="text-right"><a href="#">{{ instance.size_of_land }}   Acres</a></span></li>
+										</ul>
+
+										{% if not request.user.is_staff or not request.user.is_superuser %}
+										{% else %}
+										<a href="{{instance.get_edit_url }}" class="btn btn-animated btn-default btn-sm">Edit <i class="fa fa-external-link"></i></a>
+										<a href="{{instance.get_delete_url }}" class="btn btn-animated btn-danger btn-sm">Delete <i class="fa fa-external-link"></i></a>
+										{% endif %}
+									</div>
+
+
+								</div>
+							</aside>
+							<!-- sidebar end -->
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- main-container end -->
 
 
 
-<div>
-   <h1> <p class="lead">Comments</p> </h1>
-  <form action="" method="POST"> {% csrf_token %}
-        {{comment_form|crispy }}
-        <input type="submit" value="Post Comment">
-  </form>
-  <h1> Real comments</h1>
-    {% for comment in  comments %}
-   
-        {{ comment.content }}
-        Via {{ comment.owner}} on {{ comment.timestamp|timesince }}
 
-        {% if comment.children.count > 0 %} {{comment.children.count}}Comment{% if comment.children.count > 1 %}s{% endif %} |
-          
-        {% endif %}
-       
-       <a class="comment-reply-btn" href="#">Reply</a>
-       
-        <hr>
+				<!-- =============================================================================================== -->
 
-        <div class="comment-reply" style="display:none;">
-       
-        <blockquote>
-            {% for child_comment in  comment.children %}
-            {{ child_comment.content }}  <br>
-            Via {{ child_comment.owner}} on {{ child_comment.timestamp|timesince }}
+  
 
+      {% include "Main/footer.html" %}
 
-            
-            {% endfor %}
-        </blockquote>
-        <form action="" method="POST"> {% csrf_token %}
-                {{comment_form|crispy }}
-                <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                <input type="submit" value="Reply">
-          </form>
-
-          </div>  <!-- comment-reply -->
-         
-
-
-
-    {% endfor %}
-
-</div>
-
-<script>
-    $(document).ready(function(){ 
-        $(".comment-reply-btn").click(function(event){
-            event.preventDefault();
-            $(".comment-reply").fadeToggle();
-            console.log("hello ");
-        })
-    });
-</script>
-</body>
-</html>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends "Main/base.html" %}
+        {% block content %}
+
+        <h4 style="text-align:center;">My Restaurant <small><a href="#">Add </a></small> </h4>
+        <div style="text-align:center;">
+        {% for obj in object_list %}
+        <li><a href="#">{{ obj }}</a></li>
+       Owner:{{ obj.owner }} <br>   Title:{{ obj.title }} <br>Testimony:{{ obj.testimony }}  <br> Created:{{ obj.timestamp }} <br> Updated:{{ obj.updated }}
+        <hr>
+        {% empty %}
+      No testimonies
+        {% endfor %}
+
+      </div>
+      {% endblock content %}
+  
+  

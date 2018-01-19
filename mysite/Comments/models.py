@@ -9,6 +9,10 @@ from django.contrib.contenttypes.models import ContentType
 User = settings.AUTH_USER_MODEL 
 
 
+def upload_location(instance,filename):
+    return "%s/%s" %(instance.id,filename)
+
+
 
 class CommentManager(models.Manager):
     def all(self):
@@ -30,6 +34,7 @@ class Comment(models.Model):
     content_object = GenericForeignKey('content_type', 'object_id')
     parent = models.ForeignKey("self",blank=True, null=True,on_delete=models.CASCADE)
     content   =  models.TextField()
+    #image = models.ImageField(upload_to=upload_location,blank=True, null=True)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 
     objects = CommentManager()

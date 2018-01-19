@@ -1,0 +1,90 @@
+{% extends "Main/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+  {% include "Main/navigation.html" %}
+
+
+
+
+
+
+
+
+
+		
+	<!-- =========================================================================== -->
+			<!-- main-container start -->
+			<!-- ================ -->
+			<section class="main-container">
+
+				<div class="container">
+					<div class="row">
+
+						<!-- main start -->
+						<!-- ================ -->
+						<div class="main col-md-12">
+
+							<!-- page-title start -->
+							<!-- ================ -->
+							<h1 class="page-title">{{ instance.name }}</h1>
+							<div class="separator-2"></div>
+							<!-- page-title end -->
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="image-box team-member shadow mb-20">
+										<div class="overlay-container overlay-visible">
+										  {% if instance.image %}	<img src="{{ instance.image.url }}" alt="">   {% endif %}
+											
+											<div class="overlay-bottom">
+												<div class="text">
+													<h3 class="title margin-clear">{{ instance.name }}</h3>
+													<p class="margin-clear">{{ instance.role }}</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4 col-sm-5">
+									<p> {{ instance.details|linebreaks}}</p>
+									
+									
+									
+									
+								</div>
+								<div class="col-sm-3 col-lg-offset-1">
+									<h3 class="title">Contact Me</h3>
+									<ul class="list-icons">
+										<li><i class="fa fa-phone pr-10 text-default"></i> {{ instance.phone_number }}</li>
+										<li><i class="fa fa-mobile pr-10 text-default"></i> {{ instance.phone_number }}</li>
+										<li><a href="mailto:{{ instance.email }}"><i class="fa fa-envelope-o pr-10"></i>{{ instance.email }}</a></li>
+									</ul>
+									{% if not request.user.is_staff or not request.user.is_superuser%}
+
+									{% else %}
+
+									<h3>For Administrator Oly</h3>
+									<div class="separator-2"></div>  
+									<a target="_blank" href="{{instance.get_edit_url}}" class="btn btn-default">Edit</a>
+									<a target="_blank" href="{{instance.get_delete_url}}" class="btn btn-danger">Delete</a>
+
+									{%	endif %}
+                                </div>
+							</div>
+
+						</div>
+						<!-- main end -->
+
+					</div>
+				</div>
+			</section>
+			<!-- main-container end -->
+<!-- =========================================================================== -->
+
+
+
+    
+
+      {% include "Main/footer.html" %}
+
+{% endblock content %}

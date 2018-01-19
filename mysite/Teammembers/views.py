@@ -8,23 +8,11 @@ from .forms import Team_MeamberForm
 from django.http import Http404 ,HttpResponseRedirect
 
 
-def team_list(request):
-    """
-    This View returns alist of all the teammembers in the database
-    """
-    queryset = Team_Meamber.objects.all()
-    context = {
-       "member_list":queryset,
-       "title":"List all members here "
-    }
-    template_name = 'Teammembers/team_list.html'
-    return render(request, template_name, context)
 
-
-
+#all agents in the database
 def agents_list(request):
-    ###This is the listing of the team in the main site
-    agent_list = Team_Meamber.objects.all()[:4]
+    ###This View returns a list of all the teammembers in the database
+    agent_list = Team_Meamber.objects.all()
     context = {
         "agents_list":agent_list
     }
@@ -32,7 +20,7 @@ def agents_list(request):
     return render(request, template_name, context)
 
 
-
+#To delete
 def team_list_main_site(request):
     """
     This view is responsible to return a queryset paginated with only three team members
@@ -73,7 +61,7 @@ def team_member_createview(request):
         instance.save()
         # message success
         #messages.success(request, "Successfully Created")
-        return HttpResponseRedirect(instance.get_absolute_url_2())
+        return HttpResponseRedirect(instance.get_absolute_url())
     context = {
         "form": form,
         "title": "Create Member Listing",
@@ -89,7 +77,7 @@ def team_member_detailview(request,id=None):
     context = {
         "instance": instance
     }
-    template_name = 'dashboard/teammember_detail.html'
+    template_name = 'Teammembers/member_detail.html'
     return render(request, template_name, context)
 
       
@@ -106,7 +94,7 @@ def team_member_updateview(request,id=None):
             instance = form.save(commit=False)
             instance.owner = request.user
             instance.save()
-            return HttpResponseRedirect(instance.get_absolute_url_2())
+            return HttpResponseRedirect(instance.get_absolute_url())
 
     else:
         form = Team_MeamberForm(instance=post)
@@ -121,7 +109,7 @@ def team_member_updateview(request,id=None):
 def team_member_deleteview(request,id=None):
     instance = get_object_or_404(Team_Meamber,id=id)
     instance.delete()
-    return redirect("Teammembers:list")
+    return redirect("Teammembers:agents_list")
 
 
 

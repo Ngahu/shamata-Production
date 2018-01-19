@@ -56,10 +56,10 @@
 									<div class="header-top-dropdown text-right">
 										<div class="btn-group">
 											    {% if not request.user.is_authenticated %}
-											<a href="#" class="btn btn-default btn-sm"><i class="fa fa-user pr-10"></i> Sign Up</a>
+											<a href="{% url 'account_signup' %}" class="btn btn-default btn-sm"><i class="fa fa-user pr-10"></i> Sign Up</a>
 										</div>
 										<div class="btn-group dropdown">
-											<a href="">
+											<a href="{% url 'account_login' %}">
 											<button type="button" class="btn btn-default btn-sm"><i class="fa fa-lock pr-10"></i> Login</button> </a>	
 										</div>
 										 {% else %}
@@ -67,13 +67,14 @@
 											<a href="#" class="btn btn-default btn-sm"><i class="fa fa-user pr-10"></i>  WELCOME {{user.username}}  </a>
 										</div>
 										<div class="btn-group">
-											<a href="">
+											<a href="{% url 'account_logout' %}">
 											<button type="button" class="btn btn-default btn-sm"><i class="fa fa-lock pr-10"></i> Logout</button>	</a>
 										</div>
 										  {% endif %}
 
 										 
-										  
+								
+											  
 										
 										
 										 
@@ -164,7 +165,7 @@
 
 													<!-- mega-menu start -->
 													  <li>
-                                                    <a href="#">Home</a>
+                                                    <a href="{% url   'Main:home-view' %}">Home</a>
 
                                                 </li>
 
@@ -174,12 +175,12 @@
                                                 </li>
 
 												  <li>
-                                                    <a href="#"> properties </a>
+                                                    <a href="{% url   'Main:all_properties' %}"> properties </a>
 
                                                 </li>
 
 												  <li>
-                                                    <a href="#"> Gallery </a>
+                                                    <a href="{% url   'Main:gallery_list' %}"> Gallery </a>
 
                                                 </li>
 											
@@ -189,11 +190,11 @@
 												</li>
 												{% if not request.user.is_staff or not request.user.is_superuser%}
 													  <li>
-                                                    <a href="#">Contact Us </a>
+                                                    <a href="{% url   'Main:contact' %}">Contact Us </a>
 
 												</li>
 												{% else %}
-												<li><a href="#">Dashboard</a> </li>
+												<li><a href="{% url   'Dashboard:dash_board' %}">Dashboard</a> </li>
 											 {%	endif %}					    
 
 

@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title> {% block head_title %} Welcome | Home Page {% endblock head_title %}</title>
     <!--the bootstrap css -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href='{% static "css/bootstrap.min.css" %}'>
      <link rel="stylesheet" type="text/css" href='{% static "css/font-awesome.min.css" %}'>
    <link rel="stylesheet" type="text/css" href='{% static "css/dashboard/sb-admin.css" %}'>
@@ -55,20 +56,20 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
              <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
-                        <a href="#"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    <li class="active"> 
+                        <a href="{% url   'Dashboard:dash_board' %}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-table"></i> View Properties</a> 
+                        <a href="{% url   'Main:all_properties' %}"><i class="fa fa-fw fa-table"></i> View Properties</a> 
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-edit"></i>Create New Post </a>  
+                    <li> 
+                        <a href="{% url   'Main:post_create' %}"><i class="fa fa-fw fa-edit"></i>Create New Post </a>  
                     </li> 
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-edit"></i>Add New  Member </a>  
+                    <li> 
+                        <a href="{% url   'Teammembers:team_member_create' %}"><i class="fa fa-fw fa-edit"></i>Add New  Member </a>  
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-edit"></i>Add New  Image in Gallery </a>  
+                    <li> 
+                        <a href="{% url   'Main:gallery_create' %}"><i class="fa fa-fw fa-edit"></i>Add New  Image in Gallery </a>  
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-eye" aria-hidden="true"></i>View Email Subscriptions </a>  
@@ -76,8 +77,8 @@
                     <li>
                         <a href=""><i class=" fa fa-users"></i>View Members </a>  
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-fw fa-desktop"></i> Back to Site</a>
+                    <li>  
+                        <a href="{% url   'Main:home-view' %}"><i class="fa fa-fw fa-desktop"></i> Back to Site</a>
                     </li>
                    
                     <li>

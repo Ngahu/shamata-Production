@@ -31,3 +31,11 @@ class GalleryForm(forms.ModelForm):
             'image_description',
             'gallery_image'
             ]
+
+
+
+class ContactForm(forms.Form):
+    name     = forms.CharField(max_length=100,help_text='Enter your Name Here')
+    email   =  forms.EmailField(required=True,help_text='Enter your Email Here')
+    comment = forms.CharField(required=True,widget=forms.Textarea,help_text='Enter your Message Here')
+
